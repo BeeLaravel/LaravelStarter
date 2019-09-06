@@ -16,6 +16,7 @@ class CreateCommonFrasesTable extends Migration
         Schema::create('common_frases', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('category')->comment('分类');
             $table->string('slug')->comment('标识');
             $table->string('content')->comment('内容');
 
