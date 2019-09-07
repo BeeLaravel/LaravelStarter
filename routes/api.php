@@ -14,6 +14,12 @@ $api->version('v1', [
 	});
 
 	$api->group([
+	    'prefix' => 'mini'
+	], function ($api) {
+	    $api->resource('programs', '\App\Api\V1\Mini\ProgramController');
+	});
+
+	$api->group([
 	    'prefix' => 'tacit'
 	], function ($api) {
 	    $api->resource('questions', '\App\Api\V1\Tacit\QuestionController');
