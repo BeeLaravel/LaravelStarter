@@ -4,6 +4,11 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', [
 	'middleware' => 'api',
 ], function ($api) {
+	// 登录
+    // $api->post('authorizations', '\App\Api\V1\AuthorizationsController@store')
+    //     ->name('api.authorizations.store');
+    // 小程序登录
+
 	$api->group([
 	    'prefix' => 'auth'
 	], function ($api) {
@@ -11,6 +16,12 @@ $api->version('v1', [
 	    $api->post('logout', '\App\Api\V1\AuthController@logout');
 	    $api->post('refresh', '\App\Api\V1\AuthController@refresh');
 	    $api->post('me', "\App\Api\V1\AuthController@me");
+
+	    $api->post('weapp/login', '\App\Api\V1\AuthorizationsController@weappLogin')
+	        ->name('api.weapp.login');
+
+	    $api->post('weapp/authorizations', '\App\Api\V1\AuthorizationsController@weappStore')
+	        ->name('api.weapp.authorizations.store');
 	});
 
 	$api->group([

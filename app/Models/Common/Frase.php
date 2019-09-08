@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Models\Common;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Frase extends Model
-{
+class Frase extends Model {
     protected $table = 'common_frases';
 }
