@@ -6,6 +6,8 @@ use App\Http\Requests\Tacit\TestRequest as ThisRequest;
 use App\Models\Tacit\Test as ThisModel;
 use App\Transformers\Tacit\TestTransformer as ThisTransformer;
 
+use App\Models\Mini\User as ThisUser;
+
 class TestController extends Controller { // Tacit Question
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
@@ -19,6 +21,7 @@ class TestController extends Controller { // Tacit Question
         // $filter = $request->query('filter', "");
         $created_by = $request->query('created_by', "");
         $type = $request->query('type', 'all'); // all own reply
+        $openid = $request->query('openid', "");
 
         $items = new ThisModel;
 
@@ -28,6 +31,7 @@ class TestController extends Controller { // Tacit Question
         //     return $query->where('title', 'like', $filter)
         //         ->orWhere('choices', 'like', $filter);
         // });
+        if ( $openid ) $created_by = ThisUser::where('openid', $openid)->value('id');
         if ( $created_by ) $items = $items->where('created_by', $created_by);
         switch ( $type ) {
             case 'own':
