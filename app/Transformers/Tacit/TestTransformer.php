@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 use App\Models\Tacit\Test as ThisModel;
 
 class TestTransformer extends TransformerAbstract {
-    protected $availableIncludes = ['questions', 'original', 'tests'];
+    protected $availableIncludes = ['questions', 'original', 'tests', 'creater'];
 
     public function transform(ThisModel $item) {
         return [
@@ -15,6 +15,7 @@ class TestTransformer extends TransformerAbstract {
             'questions' => $item->questions,
             'original' => $item->original,
             'tests' => $item->tests,
+            'creater' => $item->creater,
 
             'created_by' => $item->created_by,
             'created_at' => $item->created_at->diffForHumans(),
@@ -31,5 +32,8 @@ class TestTransformer extends TransformerAbstract {
     }
     public function includeTest(ThisModel $item) {
         return $this->item($item->tests, new \App\Transformers\Tacit\TestTransformer);
+    }
+    public function includeCreater(ThisModel $item) {
+        return $this->item($item->creater, new \App\Transformers\Mini\UserTransformer);
     }
 }
