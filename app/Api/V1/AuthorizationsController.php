@@ -82,14 +82,9 @@ class AuthorizationsController extends Controller {
             $result = $user->update($attributes);
         }
 
-        $token = auth()->login($user);
-
         return $this->response->array([
             'openid' => $data['openid'],
-            'session_key' => $data['session_key'],
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'session_key' => $data['session_key']
         ])->setStatusCode(201);
     }
 }

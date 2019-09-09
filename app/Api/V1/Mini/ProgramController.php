@@ -7,6 +7,10 @@ use App\Models\Mini\Program as ThisModel;
 use App\Transformers\Mini\ProgramTransformer as ThisTransformer;
 
 class ProgramController extends Controller { // Mini Program
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     public function index(Request $request, $parent_id=0) {
         $order_column = $request->query('order_column', 'sort');
         $order_direction = $request->query('order_direction', 'asc');

@@ -7,6 +7,10 @@ use App\Models\Tacit\Question as ThisModel;
 use App\Transformers\Tacit\QuestionTransformer as ThisTransformer;
 
 class QuestionController extends Controller { // Tacit Question
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     public function index(Request $request, $parent_id=0) {
         $order_column = $request->query('order_column', 'sort');
         $order_direction = $request->query('order_direction', 'asc');

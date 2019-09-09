@@ -7,6 +7,10 @@ use App\Models\Tacit\Test as ThisModel;
 use App\Transformers\Tacit\TestTransformer as ThisTransformer;
 
 class TestController extends Controller { // Tacit Question
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     public function index(Request $request, $parent_id=0) {
         $order_column = $request->query('order_column', 'created_at');
         $order_direction = $request->query('order_direction', 'desc');
