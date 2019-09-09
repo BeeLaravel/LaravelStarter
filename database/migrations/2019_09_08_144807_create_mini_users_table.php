@@ -19,6 +19,14 @@ class CreateMiniUsersTable extends Migration
             $table->string('openid')->nullable()->unique();
             $table->string('session_key')->nullable();
 
+            $table->string('nickName')->nullable()->comment('昵称');
+            $table->string('avatarUrl')->nullable()->comment('头像');
+            $table->string('language')->nullable()->comment('语言');
+            $table->unsignedTinyInteger('gender')->nullable()->comment('性别');
+            $table->string('country')->nullable()->comment('国家');
+            $table->string('province')->nullable()->comment('省份');
+            $table->string('city')->nullable()->comment('城市');
+
             $table->timestamps();
         });
     }
