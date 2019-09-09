@@ -5,10 +5,14 @@ use League\Fractal\TransformerAbstract;
 
 use App\Models\Tacit\Test as ThisModel;
 
+use App\Models\Common\Frase;
+
 class TestTransformer extends TransformerAbstract {
     protected $availableIncludes = ['questions', 'original', 'tests', 'creater'];
 
     public function transform(ThisModel $item) {
+        $frases = Frase::where('category', 'tacit')->orderBy('sort')->pluck('content', 'slug');
+
         return [
             'id' => $item->id,
 
@@ -16,6 +20,9 @@ class TestTransformer extends TransformerAbstract {
             'original' => $item->original,
             'tests' => $item->tests,
             'creater' => $item->creater,
+
+            'percent' => $item->percent,
+            'description' => isset($item->percent) ? $frases[$item->percent] : '',
 
             'created_by' => $item->created_by,
             'created_at' => $item->created_at->diffForHumans(),
