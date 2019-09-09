@@ -21,6 +21,8 @@ class CreateMiniProgramsTable extends Migration
             $table->string('logo')->comment('图标');
             $table->string('description')->comment('描述');
             $table->string('share_image')->comment('分享图片');
+            $table->string('share_title')->comment('分享标题');
+            $table->string('share_cover')->comment('分享图片');
             $table->string('customer_service_wechat')->comment('客服微信');
 
             $table->unsignedTinyInteger('sort')->default('255')->comment('排序');

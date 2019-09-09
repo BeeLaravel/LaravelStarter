@@ -6,7 +6,7 @@ class Test extends Model {
     protected $fillable = ['test_id', 'created_by'];
 
     public function questions() { // 题目 多对多
-        return $this->belongsToMany('App\Models\Tacit\Question', 'tacit_test_question');
+        return $this->belongsToMany('App\Models\Tacit\Question', 'tacit_test_question')->withPivot('answer');
     }
     public function original() { // 原始测试 一对多 反向
         return $this->belongsTo('App\Models\Tacit\Test', 'test_id', 'id');

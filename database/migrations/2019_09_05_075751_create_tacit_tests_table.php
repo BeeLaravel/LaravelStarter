@@ -16,7 +16,7 @@ class CreateTacitTestsTable extends Migration
         Schema::create('tacit_tests', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('test_id')->comment('测试标识');
+            $table->unsignedInteger('test_id')->default(0)->comment('测试标识');
 
             $table->unsignedInteger('created_by')->comment('创建人');
             $table->timestamps();
