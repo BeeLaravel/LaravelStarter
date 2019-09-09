@@ -13,7 +13,7 @@ class QuestionTransformer extends TransformerAbstract {
             'id' => $item->id,
 
             'title' => $item->title,
-            'choices' => explode("\r\n", $item->choices),
+            'choices' => $item->choiceArray,
 
             'sort' => $item->sort,
             // 'created_by' => $item->created_by,
