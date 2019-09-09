@@ -11,7 +11,7 @@ use App\Models\Tacit\TestQuestion;
 
 class TestController extends Controller { // Tacit Question
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'store']]);
     }
 
     public function index(Request $request, $parent_id=0) {
@@ -61,11 +61,11 @@ class TestController extends Controller { // Tacit Question
         $openid = $request->input('openid');
         $created_by = ThisUser::where('openid', $openid)->value('id');
 
-        $item = new ThisModel;
-        if ( $created_by ) $item->created_by = $created_by;
-        $result = $item->save();
+        $create_array = [];
+        if ( $created_by ) $create_array['created_by'] = $created_by;
+        $item = ThisModel::create($create_array);
 
-        if ( $result ) {
+        if ( $item ) {
             $questions = $request->input('qlist');
             $questions = explode(',', $questions);
 
@@ -73,12 +73,12 @@ class TestController extends Controller { // Tacit Question
             foreach ( $questions as $question ) {
                 $question = explode('_', $question);
                 $questionArray[] = [
-                    'test_id' => 1,
+                    'test_id' => $item->id,
                     'question_id' => $question[0],
                     'answer' => $question[1],
                 ];
             }
-            TestQuestion::crate($questionArray);
+            $result = TestQuestion::insert($questionArray);
         }
 
         return [
