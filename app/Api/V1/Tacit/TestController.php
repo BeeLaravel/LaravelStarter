@@ -7,6 +7,7 @@ use App\Models\Tacit\Test as ThisModel;
 use App\Transformers\Tacit\TestTransformer as ThisTransformer;
 
 use App\Models\Mini\User as ThisUser;
+use App\Models\Tacit\TestQuestion;
 
 class TestController extends Controller { // Tacit Question
     public function __construct() {
@@ -57,7 +58,28 @@ class TestController extends Controller { // Tacit Question
         return $this->response->item($item, new ThisTransformer);
     }
     public function store(ThisRequest $request) {
-        $item = ThisModel::create($request->all());
+        $openid = $request->input('openid');
+        $created_by = ThisUser::where('openid', $openid)->value('id');
+
+        $item = new ThisModel;
+        if ( $created_by ) $item->created_by = $created_by;
+        $result = $item->save();
+
+        if ( $result ) {
+            $questions = $request->input('qlist');
+            $questions = explode(',', $questions);
+
+            $questionArray = [];
+            foreach ( $questions as $question ) {
+                $question = explode('_', $question);
+                $questionArray[] = [
+                    'test_id' => 1,
+                    'question_id' => $question[0],
+                    'answer' => $question[1],
+                ];
+            }
+            TestQuestion::crate($questionArray);
+        }
 
         return [
             'result' => $item,
