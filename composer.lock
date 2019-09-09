@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6a76f76618d745e5f08e226788dc708",
+    "content-hash": "1b88e860347556dd9a0b84b219a51f47",
     "packages": [
         {
             "name": "dingo/api",
@@ -1326,6 +1326,45 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jmluang/weapp",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmluang/weappLogin-for-laravel.git",
+                "reference": "0010b8716b7bbcf263d2905cb605e3b1052989da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmluang/weappLogin-for-laravel/zipball/0010b8716b7bbcf263d2905cb605e3b1052989da",
+                "reference": "0010b8716b7bbcf263d2905cb605e3b1052989da",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmluang\\weapp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jmluang",
+                    "email": "ljm9601@hotmail.com"
+                }
+            ],
+            "description": "weapp login package",
+            "time": "2018-12-22T17:52:56+00:00"
         },
         {
             "name": "jxlwqq/file-manager",

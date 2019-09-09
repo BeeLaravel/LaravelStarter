@@ -74,19 +74,22 @@ class AuthorizationsController extends Controller {
         $attributes['session_key'] = $data['session_key'];
 
         if ( !$user ) {
-            $user = new MiniUser;
-
-            $user->openid = $data['openid'];
-            $user->session_key = $data['session_key'];
-
-            $user->save();
+            $user = MiniUser::create([
+                'openid' => $data['openid'],
+                'session_key' => $data['session_key'],
+            ]);
         } else {
-            $user->update($attributes);
+            $result = $user->update($attributes);
         }
+
+        $token = auth()->login($user);
 
         return $this->response->array([
             'openid' => $data['openid'],
             'session_key' => $data['session_key'],
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ])->setStatusCode(201);
     }
 }

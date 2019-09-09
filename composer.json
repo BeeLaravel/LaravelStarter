@@ -12,6 +12,7 @@
         "dingo/api": "^2.3",
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
+        "jmluang/weapp": "^2.0",
         "jxlwqq/file-manager": "^1.0",
         "laravel-admin-ext/api-tester": "^1.0",
         "laravel-admin-ext/config": "^1.0",
