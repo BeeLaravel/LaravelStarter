@@ -13,11 +13,13 @@ class UserTransformer extends TransformerAbstract {
             'id' => $item->id,
 
             'openid' => $item->openid,
-            'slug' => $item->slug,
-            'logo' => $item->logo,
-            'description' => $item->description,
-            'share_image' => $item->share_image,
-            'customer_service_wechat' => $item->customer_service_wechat,
+            'nickName' => $item->nickName,
+            'avatarUrl' => $item->avatarUrl,
+            'language' => $item->language,
+            'gender' => $item->gender,
+            'country' => $item->country,
+            'province' => $item->province,
+            'city' => $item->city,
 
             'sort' => $item->sort,
             // 'created_by' => $item->created_by,
