@@ -60,6 +60,10 @@ class AuthorizationsController extends Controller {
         return $this->respondWithToken($token)->setStatusCode(201);
     }
     public function weappLogin(WeappAuthorizationRequest $request) {
+        $attributes = $request->all();
+        unset($attributes['code']);
+        unset($attributes['openid']);
+
         $code = $request->code;
 
         $miniProgram = \EasyWeChat::miniProgram();
@@ -74,10 +78,9 @@ class AuthorizationsController extends Controller {
         $attributes['session_key'] = $data['session_key'];
 
         if ( !$user ) {
-            $user = MiniUser::create([
-                'openid' => $data['openid'],
-                'session_key' => $data['session_key'],
-            ]);
+            $attributes['openid'] = $data['openid'];
+
+            $user = MiniUser::create($attributes);
         } else {
             $result = $user->update($attributes);
         }
