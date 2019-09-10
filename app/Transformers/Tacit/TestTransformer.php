@@ -22,7 +22,11 @@ class TestTransformer extends TransformerAbstract {
             $original = TestQuestion::where('test_id', $item->original->id)->pluck('answer', 'question_id');
             foreach ( $item->questions as $key => $value ) {
                 $item->questions[$key]['correct'] = (isset($original[$value->id]) && $value->pivot->answer == $original[$value->id]) ? 1 : 0;
+                $item->questions[$key]['original_answer'] = $value->pivot->answer;
             }
+
+            $item->original['creater'] = $item->original->creater;
+            // $item->original['questions'] = $item->original->questions;
         }
 
         return [
