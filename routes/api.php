@@ -27,6 +27,12 @@ $api->version('v1', [
 	});
 
 	$api->group([
+	    'prefix' => 'weapp'
+	], function ($api) {
+		$api->post('qrcode', "\App\Api\V1\Api\WeApp\QrcodeController@qrcode");
+	});
+
+	$api->group([
 	    'prefix' => 'mini'
 	], function ($api) {
 	    $api->resource('programs', '\App\Api\V1\Mini\ProgramController');
