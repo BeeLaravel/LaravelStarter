@@ -13,6 +13,10 @@ class TestTransformer extends TransformerAbstract {
     public function transform(ThisModel $item) {
         $frases = Frase::where('category', 'tacit')->orderBy('sort')->pluck('content', 'slug');
 
+        foreach ( $item->tests as $key => $value ) {
+            $item->tests[$key]['creater'] = $value->creater;
+        }
+
         return [
             'id' => $item->id,
 

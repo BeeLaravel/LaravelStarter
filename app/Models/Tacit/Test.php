@@ -31,7 +31,7 @@ class Test extends Model {
             $original = TestQuestion::where('test_id', $this->test_id)->pluck('answer', 'question_id');
 
             foreach ( $original as $question_id => $value ) {
-                if ( isset($original[$question_id]) && ($current[$question_id] == $original[$question_id]) ) $percent += 10;
+                if ( isset($current[$question_id]) && ($current[$question_id] == $original[$question_id]) ) $percent += 10;
             }
         }
 
