@@ -6,6 +6,7 @@ use League\Fractal\TransformerAbstract;
 use App\Models\Tacit\Test as ThisModel;
 
 use App\Models\Common\Frase;
+use App\Models\Tacit\TestQuestion;
 
 class TestTransformer extends TransformerAbstract {
     protected $availableIncludes = ['questions', 'original', 'tests', 'creater'];
@@ -15,6 +16,13 @@ class TestTransformer extends TransformerAbstract {
 
         foreach ( $item->tests as $key => $value ) {
             $item->tests[$key]['creater'] = $value->creater;
+        }
+
+        if ( $item->original ) {
+            $original = TestQuestion::where('test_id', $item->original->id)->pluck('answer', 'question_id');
+            foreach ( $item->questions as $key => $value ) {
+                $item->questions[$key]['correct'] = (isset($original[$value->id]) && $value->pivot->answer == $original[$value->id]) ? 1 : 0;
+            }
         }
 
         return [
