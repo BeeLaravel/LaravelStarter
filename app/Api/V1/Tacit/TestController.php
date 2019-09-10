@@ -63,6 +63,7 @@ class TestController extends Controller { // Tacit Question
 
         $create_array = [];
         if ( $created_by ) $create_array['created_by'] = $created_by;
+        if ( $id = $request->input('id') ) $create_array['test_id'] = $id;
         $item = ThisModel::create($create_array);
 
         if ( $item ) {
