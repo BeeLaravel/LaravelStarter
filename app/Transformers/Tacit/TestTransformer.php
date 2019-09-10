@@ -27,6 +27,7 @@ class TestTransformer extends TransformerAbstract {
 
         return [
             'id' => $item->id,
+            'unlock' => $item->unlock,
 
             'questions' => $item->questions,
             'original' => $item->original,
