@@ -24,6 +24,7 @@ class CreateMiniProgramsTable extends Migration
             $table->string('share_title')->nullable()->comment('分享标题');
             $table->string('share_cover')->nullable()->comment('分享图片');
             $table->string('customer_service_wechat')->nullable()->comment('客服微信');
+            $table->unsignedTinyInteger('ios_payment_closed')->default(0)->nullable()->comment('IOS 关闭支付');
 
             $table->unsignedTinyInteger('sort')->default('255')->comment('排序');
             $table->unsignedInteger('created_by')->comment('创建人');

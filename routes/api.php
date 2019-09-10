@@ -4,10 +4,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', [
 	'middleware' => 'api',
 ], function ($api) {
-	// 登录
-    // $api->post('authorizations', '\App\Api\V1\AuthorizationsController@store')
-    //     ->name('api.authorizations.store');
-    // 小程序登录
+	$api->get('forms', "\App\Api\V1\Common\CommonController@forms");
 
 	$api->group([
 	    'prefix' => 'auth'

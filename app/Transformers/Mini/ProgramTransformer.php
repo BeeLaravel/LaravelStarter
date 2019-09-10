@@ -18,6 +18,7 @@ class ProgramTransformer extends TransformerAbstract {
             'description' => $item->description,
             'share_image' => $item->share_image,
             'customer_service_wechat' => $item->customer_service_wechat,
+            'ios_payment_closed' => $item->ios_payment_closed,
 
             'sort' => $item->sort,
             // 'created_by' => $item->created_by,
