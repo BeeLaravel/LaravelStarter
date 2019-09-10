@@ -4,7 +4,12 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', [
 	'middleware' => 'api',
 ], function ($api) {
-	$api->get('forms', "\App\Api\V1\Common\CommonController@forms");
+	$api->group([
+	    'prefix' => 'common'
+	], function ($api) {
+		$api->post('forms', "\App\Api\V1\Common\CommonController@forms");
+		$api->post('events', "\App\Api\V1\Common\CommonController@events");
+	});
 
 	$api->group([
 	    'prefix' => 'auth'
