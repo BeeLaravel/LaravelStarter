@@ -83,7 +83,7 @@ class TestController extends Controller { // Tacit Question
         }
 
         return [
-            'result' => $item,
+            'result' => $item->with('creater'),
         ];
     }
     public function update(ThisRequest $request, $id) {
