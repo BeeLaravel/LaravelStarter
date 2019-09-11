@@ -2,8 +2,6 @@
 namespace App\Models\Tacit;
 
 class Test extends Model {
-    use \Znck\Eloquent\Traits\BelongsToThrough;
-
     protected $table = 'tacit_tests';
     protected $fillable = ['test_id', 'created_by'];
     protected $appends = [
