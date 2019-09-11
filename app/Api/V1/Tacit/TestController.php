@@ -82,8 +82,9 @@ class TestController extends Controller { // Tacit Question
             $result = TestQuestion::insert($questionArray);
         }
 
+        $item = ThisModel::with(['creater'])->find($item->id);
         return [
-            'result' => $item->with('creater'),
+            'result' => $item
         ];
     }
     public function update(ThisRequest $request, $id) {
