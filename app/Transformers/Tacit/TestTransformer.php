@@ -9,7 +9,7 @@ use App\Models\Common\Frase;
 use App\Models\Tacit\TestQuestion;
 
 class TestTransformer extends TransformerAbstract {
-    protected $availableIncludes = ['questions', 'original', 'tests', 'creater'];
+    protected $availableIncludes = ['creater', 'questions', 'original', 'tests'];
 
     public function transform(ThisModel $item) {
         $frases = Frase::where('category', 'tacit')->orderBy('sort')->pluck('content', 'slug');
@@ -33,10 +33,10 @@ class TestTransformer extends TransformerAbstract {
             'id' => $item->id,
             'unlock' => $item->unlock,
 
+            'creater' => $item->creater,
             'questions' => $item->questions,
             'original' => $item->original,
             'tests' => $item->tests,
-            'creater' => $item->creater,
 
             'percent' => $item->percent,
             'description' => isset($item->percent) ? $frases[$item->percent] : '',
@@ -48,6 +48,9 @@ class TestTransformer extends TransformerAbstract {
         ];
     }
 
+    public function includeCreater(ThisModel $item) {
+        return $this->item($item->creater, new \App\Transformers\Mini\UserTransformer);
+    }
     public function includeQuestion(ThisModel $item) {
         return $this->item($item->questions, new \App\Transformers\Tacit\QuestionTransformer);
     }
@@ -56,8 +59,5 @@ class TestTransformer extends TransformerAbstract {
     }
     public function includeTest(ThisModel $item) {
         return $this->item($item->tests, new \App\Transformers\Tacit\TestTransformer);
-    }
-    public function includeCreater(ThisModel $item) {
-        return $this->item($item->creater, new \App\Transformers\Mini\UserTransformer);
     }
 }

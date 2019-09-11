@@ -2,6 +2,8 @@
 namespace App\Models\Tacit;
 
 class Test extends Model {
+    use \Znck\Eloquent\Traits\BelongsToThrough;
+
     protected $table = 'tacit_tests';
     protected $fillable = ['test_id', 'created_by'];
     protected $appends = [
@@ -9,6 +11,9 @@ class Test extends Model {
     ];
 
     // ### 关联
+    public function creater() { // 创建人 一对多 反向
+        return $this->belongsTo('App\Models\Mini\User', 'created_by');
+    }
     public function questions() { // 题目 多对多
         return $this->belongsToMany('App\Models\Tacit\Question', 'tacit_test_question')->withPivot('answer');
     }
@@ -17,9 +22,6 @@ class Test extends Model {
     }
     public function tests() { // 关联测试 一对多
         return $this->hasMany('App\Models\Tacit\Test');
-    }
-    public function creater() { // 创建人 一对多 反向
-        return $this->belongsTo('App\Models\Mini\User', 'created_by');
     }
 
     // ### 属性
