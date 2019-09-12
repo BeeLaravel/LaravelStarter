@@ -17,7 +17,7 @@ class AuthorizationsController extends Controller {
         $code = $request->code; // weapp wx.login 获取的 code
 
         $miniProgram = \EasyWeChat::miniProgram();
-        $data = $miniProgram->auth->session($code);
+        $data = $miniProgram->auth->session($code); // 登录
         // [
         //   "session_key" => "yJAlefMLfaIFFfCEAjEhnw=="
         //   "expires_in" => 7200

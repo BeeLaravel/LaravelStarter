@@ -3,7 +3,7 @@ namespace App\Api\V1\Api\WeApp;
 
 use Illuminate\Http\Request;
 
-class QrcodeController extends Controller { // Qrcode
+class QrcodeController extends Controller { // Qrcode 二维码
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['qrcode']]);
     }
